@@ -14,30 +14,11 @@
 #define HoolleMotor_Speed 85 // 吐珠电机速度100%
 #define HoolleMotor_Dir 0     // 吐珠电机方向
 
-#define HOOLLE_TYPE_CERAMIC 0x00U // 瓷珠
-#define HOOLLE_TYPE_STEEL   0x01U // 钢珠
-
 typedef struct
 {
     motor_t Motor;
-
     volatile uint16_t Hoolle_num;
-
-    /* 保存事件发生时的数值，避免发送前数量又发生变化 */
-    volatile uint16_t RemainingReportValue;
-    volatile uint16_t TimeoutReportValue;
-
     volatile uint8_t RetryCount;
-
-    /* 清珠模式：清珠空仓超时后需要把 Hoolle_num 清零 */
-    volatile uint8_t ClearMode;
-
-    /* 独立保存每台吐珠电机的上报状态 */
-    volatile uint8_t RemainingReportPending;
-    volatile uint8_t TimeoutReportPending;
-
-    /* 发送给安卓的补充位 */
-    uint8_t ExpandCode;
 } Motor_Hoolle;
 
 typedef struct
@@ -55,10 +36,7 @@ typedef struct
 
 void Device_Init(void);
 void CtrlTask(void);
-
 void Hoolle_Output(Motor_Hoolle *Motor, uint16_t num);
-void Hoolle_Clear(Motor_Hoolle *Motor);
-
 void Card_Output(Motor_Card *Switch, uint16_t num);
 void Valve_Start(Switch_Valve *Valve, uint8_t TriggerCount);
 void Device_Stop(void);

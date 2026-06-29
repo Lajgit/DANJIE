@@ -79,10 +79,10 @@ static void USART1_Deal(void *Rx_mesg)
                 /// 出珠
             case r_HoolleOutput:
                 data = ((mesg->Data3 << 8) | mesg->Data4);
-                if (mesg->ExpandCode == HOOLLE_TYPE_CERAMIC)
-                    Hoolle_Output(&Motor_Hoolle2, (uint16_t)data); // 瓷珠
+                if (mesg->ExpandCode == 0x00)
+                    Hoolle_Output(&Motor_Hoolle2, data); // 瓷珠
                 else
-                    Hoolle_Output(&Motor_Hoolle1, (uint16_t)data); // 钢珠
+                    Hoolle_Output(&Motor_Hoolle1, data); // 钢珠
                 break;
                 /// 出卡
             case r_CardOutput:
@@ -113,14 +113,10 @@ static void USART1_Deal(void *Rx_mesg)
                 break;
                 /// 清珠
             case r_OutputAllHoolle:
-                if (mesg->ExpandCode == HOOLLE_TYPE_CERAMIC)
-                {
-                    Hoolle_Clear(&Motor_Hoolle2);
-                }
+                if (mesg->ExpandCode == 0x00)
+                    Hoolle_Output(&Motor_Hoolle2, 0xFFFF - Motor_Hoolle2.Hoolle_num);
                 else
-                {
-                    Hoolle_Clear(&Motor_Hoolle1);
-                }
+                    Hoolle_Output(&Motor_Hoolle1, 0xFFFF - Motor_Hoolle1.Hoolle_num);
                 break;
                 /// 吐出剩余
             case r_OutputRemainingItem:

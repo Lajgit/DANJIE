@@ -65,20 +65,14 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOD, Q7_Pin|Q8_Pin|Q9_Pin|Q10_Pin
                           |Q11_Pin, GPIO_PIN_RESET);
 
-  /* 投币、投珠光眼：下降沿开始遮挡，上升沿结束遮挡 */
-  GPIO_InitStruct.Pin = HoolleInput_Pin | CoinInput_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-
-  /* 卡片反馈保持原来的单上升沿逻辑 */
-  GPIO_InitStruct.Pin = CardFeedback_Pin;
+  /*Configure GPIO pins : HoolleInput_Pin CardFeedback_Pin CoinInput_Pin */
+  GPIO_InitStruct.Pin = HoolleInput_Pin|CardFeedback_Pin|CoinInput_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /* 钢珠、瓷珠吐珠检测光眼 */
-  GPIO_InitStruct.Pin = HoolleOutput_1_Pin | HoolleOutput_2_Pin;
+  /*Configure GPIO pins : HoolleOutput_1_Pin HoolleOutput_2_Pin */
+  GPIO_InitStruct.Pin = HoolleOutput_1_Pin|HoolleOutput_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
