@@ -1,0 +1,27 @@
+>>> info
+
+Compiler Full Name: Component: ARM Compiler 5.05 update 1 (build 106)
+Compiler Version: 5.05
+Builder Mode: Incremental
+The amount of C files: 36
+The amount of C++ files: 0
+The amount of Asm files: 1
+
+>>> prebuild
+
+
+
+>>> cc
+
+".\..\App\Src\app_bootloader.c", line 65: Warning:  #550-D: variable "ProgramStatus" was set but never used
+      HAL_StatusTypeDef ProgramStatus;
+                        ^
+.\..\App\Src\app_bootloader.c: 1 warning, 0 errors
+
+>>> ld
+
+Program Size: Code=16662 RO-data=458 RW-data=132 ZI-data=18868  
+
+
+>>> postbuild
+

@@ -1,0 +1,256 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.25.0.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 2, 3, LIC=KRMW3-ACNVB-Y8KFK-Z7KZ0-J4CU1-8VSP7
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.25.0.0
+Toolchain Path:  D:\keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.25.0.0
+Dialog DLL:      DCM.DLL V1.17.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
+Dialog DLL:      TCM.DLL V1.34.0.0
+ 
+<h2>Project:</h2>
+E:\1_Project\CtrlBoard\Danjie_Ctrl\MDK-ARM\Danjie_Ctrl.uvprojx
+Project File Date:  06/04/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\keil5\ARM\ARMCC\Bin'
+Build target 'Danjie_Ctrl'
+assembling startup_stm32f103xb.s...
+compiling stm32f1xx_it.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+compiling gpio.c...
+compiling spi.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling dma.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling main.c...
+compiling stm32f1xx_hal_dma.c...
+compiling stm32f1xx_hal_msp.c...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling usart.c...
+compiling tim.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_spi.c...
+compiling system_stm32f1xx.c...
+compiling port_flash.c...
+..\Mid\Src\port_flash.c(36): warning:  #1-D: last line of file ends without a newline
+  }
+..\Mid\Src\port_flash.c: 1 warning, 0 errors
+compiling port_communicate.c...
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Src\port_communicate.c: 1 warning, 0 errors
+compiling port_event.c...
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Src\port_event.c(18): warning:  #1-D: last line of file ends without a newline
+  }
+..\Mid\Src\port_event.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_exti.c...
+compiling port_key.c...
+..\Mid\Src\port_key.c(23): warning:  #188-D: enumerated type mixed with another type
+      key->last_state = !key->trigger_level;
+..\Mid\Src\port_key.c(130): warning:  #1-D: last line of file ends without a newline
+  }
+..\Mid\Src\port_key.c: 2 warnings, 0 errors
+compiling port_digitaltube.c...
+..\Mid\Src\port_digitaltube.c(92): warning:  #940-D: missing return statement at end of non-void function "DigitalTube_SetNum" 
+  }
+..\Mid\Src\port_digitaltube.c: 1 warning, 0 errors
+compiling stm32f1xx_hal_flash_ex.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling port_light.c...
+..\Mid\Src\port_light.c(21): warning:  #1-D: last line of file ends without a newline
+  }
+..\Mid\Src\port_light.c: 1 warning, 0 errors
+compiling app_crc.c...
+..\Lib\Inc\app_crc.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Src\app_crc.c(73): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\app_crc.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_flash.c...
+compiling stm32f1xx_hal_uart.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling port_lighteffect.c...
+..\Mid\Inc\port_lighteffect.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Src\port_lighteffect.c(1204): warning:  #1-D: last line of file ends without a newline
+  }
+..\Mid\Src\port_lighteffect.c: 2 warnings, 0 errors
+compiling stm32f1xx_hal_tim.c...
+compiling app_list.c...
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Src\app_list.c(183): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\app_list.c: 2 warnings, 0 errors
+compiling FlashTask.c...
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\FlashTask.c(43): warning:  #1-D: last line of file ends without a newline
+  }
+..\Task\Src\FlashTask.c: 2 warnings, 0 errors
+compiling DigitalTubeTask.c...
+..\Task\Src\DigitalTubeTask.c(37): warning:  #1-D: last line of file ends without a newline
+  }
+..\Task\Src\DigitalTubeTask.c: 1 warning, 0 errors
+compiling MainTask.c...
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_lighteffect.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\MainTask.c(10): error:  #5: cannot open source input file "iwdg.h": No such file or directory
+  #include "iwdg.h"
+..\Task\Src\MainTask.c: 4 warnings, 1 error
+compiling KeyTask.c...
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_lighteffect.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\KeyTask.c(9): error:  #20: identifier "Button2_GPIO_Port" is undefined
+  static GPIO_TypeDef *Button_GPIO[7] = {Button1_GPIO_Port, Button2_GPIO_Port, Button3_GPIO_Port, Button4_GPIO_Port, Button5_GPIO_Port, Button6_GPIO_Port, Encoder_K_GPIO_Port};
+..\Task\Src\KeyTask.c(9): error:  #20: identifier "Button3_GPIO_Port" is undefined
+  static GPIO_TypeDef *Button_GPIO[7] = {Button1_GPIO_Port, Button2_GPIO_Port, Button3_GPIO_Port, Button4_GPIO_Port, Button5_GPIO_Port, Button6_GPIO_Port, Encoder_K_GPIO_Port};
+..\Task\Src\KeyTask.c(9): error:  #20: identifier "Button4_GPIO_Port" is undefined
+  static GPIO_TypeDef *Button_GPIO[7] = {Button1_GPIO_Port, Button2_GPIO_Port, Button3_GPIO_Port, Button4_GPIO_Port, Button5_GPIO_Port, Button6_GPIO_Port, Encoder_K_GPIO_Port};
+..\Task\Src\KeyTask.c(9): error:  #20: identifier "Button5_GPIO_Port" is undefined
+  static GPIO_TypeDef *Button_GPIO[7] = {Button1_GPIO_Port, Button2_GPIO_Port, Button3_GPIO_Port, Button4_GPIO_Port, Button5_GPIO_Port, Button6_GPIO_Port, Encoder_K_GPIO_Port};
+..\Task\Src\KeyTask.c(9): error:  #20: identifier "Button6_GPIO_Port" is undefined
+  static GPIO_TypeDef *Button_GPIO[7] = {Button1_GPIO_Port, Button2_GPIO_Port, Button3_GPIO_Port, Button4_GPIO_Port, Button5_GPIO_Port, Button6_GPIO_Port, Encoder_K_GPIO_Port};
+..\Task\Src\KeyTask.c(10): error:  #20: identifier "Button2_Pin" is undefined
+  static uint16_t Button_Pin[7] = {Button1_Pin, Button2_Pin, Button3_Pin, Button4_Pin, Button5_Pin, Button6_Pin, Encoder_K_Pin};
+..\Task\Src\KeyTask.c(10): error:  #20: identifier "Button3_Pin" is undefined
+  static uint16_t Button_Pin[7] = {Button1_Pin, Button2_Pin, Button3_Pin, Button4_Pin, Button5_Pin, Button6_Pin, Encoder_K_Pin};
+..\Task\Src\KeyTask.c(10): error:  #20: identifier "Button4_Pin" is undefined
+  static uint16_t Button_Pin[7] = {Button1_Pin, Button2_Pin, Button3_Pin, Button4_Pin, Button5_Pin, Button6_Pin, Encoder_K_Pin};
+..\Task\Src\KeyTask.c(10): error:  #20: identifier "Button5_Pin" is undefined
+  static uint16_t Button_Pin[7] = {Button1_Pin, Button2_Pin, Button3_Pin, Button4_Pin, Button5_Pin, Button6_Pin, Encoder_K_Pin};
+..\Task\Src\KeyTask.c(10): error:  #20: identifier "Button6_Pin" is undefined
+  static uint16_t Button_Pin[7] = {Button1_Pin, Button2_Pin, Button3_Pin, Button4_Pin, Button5_Pin, Button6_Pin, Encoder_K_Pin};
+..\Task\Src\KeyTask.c(32): warning:  #177-D: function "Button_LongCallback"  was declared but never referenced
+  static void Button_LongCallback(uint16_t id)
+..\Task\Src\KeyTask.c: 5 warnings, 10 errors
+compiling InterruptTask.c...
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\InterruptTask.c(21): warning:  #1-D: last line of file ends without a newline
+  }
+..\Task\Src\InterruptTask.c: 4 warnings, 0 errors
+compiling MesgTask.c...
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\MesgTask.c(22): warning:  #1-D: last line of file ends without a newline
+  }
+..\Task\Src\MesgTask.c(12): warning:  #177-D: variable "NFCUnlock_mesg"  was declared but never referenced
+  static uint8_t NFCUnlock_mesg[11] = {0xaa, 0x0f, 0x01, 0x01, 0x01, 0x01, 0x5c, 0x77, 0x08, 0x7f, 0x55};
+..\Task\Src\MesgTask.c: 5 warnings, 0 errors
+compiling app_ringbuf.c...
+..\Lib\Src\app_ringbuf.c(212): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\app_ringbuf.c: 1 warning, 0 errors
+compiling LightTask.c...
+..\Mid\Inc\port_lighteffect.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\LightTask.c(70): warning:  #1-D: last line of file ends without a newline
+  }
+..\Task\Src\LightTask.c: 4 warnings, 0 errors
+compiling CommTask.c...
+..\Mid\Inc\port_communicate.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_list.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_event.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Mid\Inc\port_lighteffect.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Lib\Inc\app_crc.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Task\Src\CommTask.c(52): warning:  #1182-D: a declaration cannot have a label
+              uint32_t data = mesg->Data1 << 24 | mesg->Data2 << 16 | mesg->Data3 << 8 | mesg->Data4;
+..\Task\Src\CommTask.c(48): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "data"  (declared at line 52)
+          switch (mesg->Code2)
+          ^
+..\Task\Src\CommTask.c(44): warning:  #177-D: variable "data"  was declared but never referenced
+      uint32_t data;
+..\Task\Src\CommTask.c: 8 warnings, 0 errors
+compiling app_flash.c...
+..\Lib\Src\app_flash.c(177): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\app_flash.c: 1 warning, 0 errors
+compiling softspi.c...
+..\Lib\Src\softspi.c(25): warning:  #188-D: enumerated type mixed with another type
+          gpio_write(hspi->SPI_SDA_GPIOPORT, hspi->SPI_SDA_GPIOPIN, (data & (0x80 >> i)));
+..\Lib\Src\softspi.c(53): warning:  #188-D: enumerated type mixed with another type
+              gpio_write(hspi->SPI_SDA_GPIOPORT, hspi->SPI_SDA_GPIOPIN, (pData[i] & (0x80 >> j)));
+..\Lib\Src\softspi.c(61): warning:  #188-D: enumerated type mixed with another type
+          gpio_write(hspi->SPI_CS_GPIOPORT, hspi->SPI_CS_GPIOPIN, !hspi->CS_Level);
+..\Lib\Src\softspi.c(76): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\softspi.c: 4 warnings, 0 errors
+compiling app_ws2812.c...
+..\Lib\Src\app_ws2812.c(377): warning:  #1-D: last line of file ends without a newline
+  }
+..\Lib\Src\app_ws2812.c: 1 warning, 0 errors
+"Danjie_Ctrl\Danjie_Ctrl.axf" - 11 Error(s), 54 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.2.0.pack
+                ARM.CMSIS.5.2.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.0.2
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.3.0.pack
+                Keil.STM32F1xx_DFP.2.3.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Danjie_Ctrl
+  D:\keil5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include
+  D:\keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.0.2
+Target not created.
+Build Time Elapsed:  00:00:09
+</pre>
+</body>
+</html>

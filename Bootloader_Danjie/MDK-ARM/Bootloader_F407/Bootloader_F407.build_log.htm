@@ -1,0 +1,115 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.25.0.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 2, 3, LIC=KRMW3-ACNVB-Y8KFK-Z7KZ0-J4CU1-8VSP7
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.25.0.0
+Toolchain Path:  D:\keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.25.0.0
+Dialog DLL:      DCM.DLL V1.17.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
+Dialog DLL:      TCM.DLL V1.34.0.0
+ 
+<h2>Project:</h2>
+E:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\Bootloader_F407.uvprojx
+Project File Date:  12/08/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\keil5\ARM\ARMCC\Bin'
+Build target 'Bootloader_F407'
+compiling tim.c...
+../Core/Inc/tim.h(35): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  extern TIM_HandleTypeDef htim3;
+../Core/Inc/tim.h(43): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+../Core/Src/tim.c(27): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  TIM_HandleTypeDef htim3;
+../Core/Src/tim.c(38): error:  #20: identifier "TIM_ClockConfigTypeDef" is undefined
+    TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+../Core/Src/tim.c(39): error:  #20: identifier "TIM_MasterConfigTypeDef" is undefined
+    TIM_MasterConfigTypeDef sMasterConfig = {0};
+../Core/Src/tim.c(40): error:  #20: identifier "TIM_OC_InitTypeDef" is undefined
+    TIM_OC_InitTypeDef sConfigOC = {0};
+../Core/Src/tim.c(47): error:  #20: identifier "TIM_COUNTERMODE_UP" is undefined
+    htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+../Core/Src/tim.c(49): error:  #20: identifier "TIM_CLOCKDIVISION_DIV1" is undefined
+    htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+../Core/Src/tim.c(50): error:  #20: identifier "TIM_AUTORELOAD_PRELOAD_DISABLE" is undefined
+    htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+../Core/Src/tim.c(51): warning:  #223-D: function "HAL_TIM_Base_Init" declared implicitly
+    if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+../Core/Src/tim.c(55): error:  #20: identifier "TIM_CLOCKSOURCE_INTERNAL" is undefined
+    sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+../Core/Src/tim.c(56): warning:  #223-D: function "HAL_TIM_ConfigClockSource" declared implicitly
+    if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+../Core/Src/tim.c(60): warning:  #223-D: function "HAL_TIM_PWM_Init" declared implicitly
+    if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+../Core/Src/tim.c(64): error:  #20: identifier "TIM_TRGO_RESET" is undefined
+    sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+../Core/Src/tim.c(65): error:  #20: identifier "TIM_MASTERSLAVEMODE_DISABLE" is undefined
+    sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+../Core/Src/tim.c(66): warning:  #223-D: function "HAL_TIMEx_MasterConfigSynchronization" declared implicitly
+    if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+../Core/Src/tim.c(70): error:  #20: identifier "TIM_OCMODE_PWM1" is undefined
+    sConfigOC.OCMode = TIM_OCMODE_PWM1;
+../Core/Src/tim.c(72): error:  #20: identifier "TIM_OCPOLARITY_HIGH" is undefined
+    sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+../Core/Src/tim.c(73): error:  #20: identifier "TIM_OCFAST_DISABLE" is undefined
+    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+../Core/Src/tim.c(74): warning:  #223-D: function "HAL_TIM_PWM_ConfigChannel" declared implicitly
+    if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+../Core/Src/tim.c(74): error:  #20: identifier "TIM_CHANNEL_4" is undefined
+    if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+../Core/Src/tim.c(85): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
+../Core/Src/tim.c(115): error:  #20: identifier "TIM_DMA_ID_CC4" is undefined
+      __HAL_LINKDMA(tim_baseHandle,hdma[TIM_DMA_ID_CC4],hdma_tim3_ch4_up);
+../Core/Src/tim.c(116): error:  #20: identifier "TIM_DMA_ID_UPDATE" is undefined
+      __HAL_LINKDMA(tim_baseHandle,hdma[TIM_DMA_ID_UPDATE],hdma_tim3_ch4_up);
+../Core/Src/tim.c(123): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
+../Core/Src/tim.c(151): error:  #20: identifier "TIM_HandleTypeDef" is undefined
+  void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
+../Core/Src/tim.c(163): error:  #20: identifier "TIM_DMA_ID_CC4" is undefined
+      HAL_DMA_DeInit(tim_baseHandle->hdma[TIM_DMA_ID_CC4]);
+../Core/Src/tim.c(164): error:  #20: identifier "TIM_DMA_ID_UPDATE" is undefined
+      HAL_DMA_DeInit(tim_baseHandle->hdma[TIM_DMA_ID_UPDATE]);
+../Core/Src/tim.c: 5 warnings, 23 errors
+"Bootloader_F407\Bootloader_F407.axf" - 23 Error(s), 5 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.2.0.pack
+                ARM.CMSIS.5.2.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.0.2
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
+                Keil.STM32F4xx_DFP.2.17.1
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Bootloader_F407
+  D:\keil5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include
+  D:\keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.0.2
+Target not created.
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

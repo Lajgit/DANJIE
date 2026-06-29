@@ -1,0 +1,379 @@
+[2025-12-27 16:19:45]	[info] incremental build: 37 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\fatfs_sd.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\dma.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\gpio.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\spi.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_hal_msp.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_it.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\system_stm32f4xx.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\tim.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\usart.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\FATFS\App\fatfs.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\FATFS\Target\user_diskio.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\diskio.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\ff.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\option\syscall.c': object (.o) file not exist
+'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\startup_stm32f407xx.s': object (.o) file not exist
+
+[2025-12-27 16:19:51]	[done]
+	build successfully !
+
+[2025-12-27 19:52:48]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2025-12-27 19:52:50]	[done]
+	build successfully !
+
+[2025-12-27 19:54:18]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2025-12-27 19:54:19]	[done]
+	build successfully !
+
+[2025-12-27 19:54:38]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2025-12-27 19:54:39]	[done]
+	build successfully !
+
+[2025-12-27 19:56:19]	[info] incremental build: 6 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\dma.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\gpio.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_it.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\tim.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\startup_stm32f407xx.s': source file has been changed.
+
+[2025-12-27 19:56:21]	[done]
+	build successfully !
+
+[2025-12-27 19:56:36]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2025-12-27 19:56:37]	[done]
+	build successfully !
+
+[2025-12-27 19:56:53]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2025-12-27 19:56:54]	[done]
+	build successfully !
+
+[2025-12-27 19:57:08]	[done]
+	build successfully !
+
+[2025-12-27 19:57:18]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2025-12-27 19:57:19]	[done]
+	build successfully !
+
+[2025-12-29 18:34:55]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2025-12-29 18:34:57]	[done]
+	build successfully !
+
+[2026-01-09 12:31:44]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-01-09 12:31:46]	[done]
+	build successfully !
+
+[2026-01-09 12:31:51]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-01-09 12:31:53]	[done]
+	build successfully !
+
+[2026-01-09 13:08:40]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_bootloader.h' has been changed.
+
+[2026-01-09 13:08:41]	[done]
+	build successfully !
+
+[2026-01-09 13:08:49]	[done]
+	build successfully !
+
+[2026-01-09 13:11:05]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_bootloader.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_bootloader.h' has been changed.
+
+[2026-01-09 13:11:07]	[done]
+	build successfully !
+
+[2026-01-09 13:13:38]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_bootloader.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_bootloader.h' has been changed.
+
+[2026-01-09 13:13:40]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol RGB_buffer (referred from app_bootloader.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2026-01-09 13:14:18]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2026-01-09 13:14:20]	[done]
+	build successfully !
+
+[2026-01-09 13:14:35]	[done]
+	build successfully !
+
+[2026-01-09 13:17:34]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+
+[2026-01-09 13:17:35]	[done]
+	build successfully !
+
+[2026-01-09 13:17:44]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+
+[2026-01-09 13:17:45]	[done]
+	build successfully !
+
+[2026-01-09 13:18:07]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_ws2812.h' has been changed.
+
+[2026-01-09 13:18:09]	[done]
+	build successfully !
+
+[2026-01-13 17:37:51]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+
+[2026-01-13 17:37:53]	[done]
+	build successfully !
+
+[2026-01-13 17:38:02]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-01-13 17:38:03]	[done]
+	build successfully !
+
+[2026-01-13 17:38:16]	[done]
+	build successfully !
+
+[2026-01-13 17:59:38]	[done]
+	build successfully !
+
+[2026-01-18 18:02:07]	[done]
+	build successfully !
+
+[2026-01-30 14:39:17]	[info] incremental build: 4 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': source file has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-01-30 14:39:20]	[done]
+	build successfully !
+
+[2026-01-30 14:39:52]	[done]
+	build successfully !
+
+[2026-02-03 14:55:28]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-02-03 14:55:31]	[done]
+	build successfully !
+
+[2026-02-27 11:06:27]	[done]
+	build successfully !
+
+[2026-02-28 14:13:24]	[done]
+	build successfully !
+
+[2026-04-01 16:25:58]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-04-01 16:26:00]	[done]
+	build successfully !
+
+[2026-04-02 15:37:11]	[done]
+	build successfully !
+
+[2026-04-06 14:07:59]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_it.c': source file has been changed.
+
+[2026-04-06 14:08:00]	[done]
+	build successfully !
+
+[2026-04-17 16:47:30]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-04-17 16:47:32]	[done]
+	build successfully !
+
+[2026-05-23 13:49:05]	[done]
+	build successfully !
+
+[2026-05-23 13:49:15]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-05-23 13:49:18]	[done]
+	build successfully !
+
+[2026-06-11 10:40:56]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\App\Src\app_sd.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+'e:\1_Project\Bootloader\Bootloader_F407\Core\Src\main.c': dependence 'e:\1_Project\Bootloader\Bootloader_F407\MDK-ARM\..\App\Inc\app_sd.h' has been changed.
+
+[2026-06-11 10:40:57]	[done]
+	build successfully !
+
+[2026-06-15 17:28:59]	[done]
+	build successfully !
+
+[2026-06-15 18:13:49]	[done]
+	build successfully !
+
+[2026-06-15 18:52:33]	[done]
+	build successfully !
+
+[2026-06-29 16:25:17]	[info] incremental build: 37 source files changed
+These source files will be recompiled
+---
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\App\Src\app_bootloader.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\App\Src\app_sd.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\App\Src\app_ws2812.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\App\Src\fatfs_sd.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\dma.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\gpio.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\main.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\spi.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_hal_msp.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\stm32f4xx_it.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\system_stm32f4xx.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\tim.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Core\Src\usart.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\FATFS\App\fatfs.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\FATFS\Target\user_diskio.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\diskio.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\ff.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\Middlewares\Third_Party\FatFs\src\option\syscall.c': compiler options has been changed.
+'e:\单片机项目\Source\Bootloader\Bootloader_F407\MDK-ARM\startup_stm32f407xx.s': compiler options has been changed.
+
+[2026-06-29 16:25:18]	[done]
+	build successfully !
+

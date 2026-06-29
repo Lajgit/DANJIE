@@ -1,0 +1,39 @@
+--cpu Cortex-M4.fp --library_type=microlib --scatter e:/单片机项目/Source/Bootloader/Bootloader_F407/MDK-ARM/build/Bootloader/Bootloader_F407.sct --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols --info sizes --info totals --info unused --info veneers
+--list .\build\Bootloader\Bootloader_F407.map
+.\build\Bootloader\.obj\__\App\Src\app_bootloader.o
+.\build\Bootloader\.obj\__\App\Src\app_sd.o
+.\build\Bootloader\.obj\__\App\Src\app_ws2812.o
+.\build\Bootloader\.obj\__\App\Src\fatfs_sd.o
+.\build\Bootloader\.obj\__\Core\Src\dma.o
+.\build\Bootloader\.obj\__\Core\Src\gpio.o
+.\build\Bootloader\.obj\__\Core\Src\main.o
+.\build\Bootloader\.obj\__\Core\Src\spi.o
+.\build\Bootloader\.obj\__\Core\Src\stm32f4xx_hal_msp.o
+.\build\Bootloader\.obj\__\Core\Src\stm32f4xx_it.o
+.\build\Bootloader\.obj\__\Core\Src\system_stm32f4xx.o
+.\build\Bootloader\.obj\__\Core\Src\tim.o
+.\build\Bootloader\.obj\__\Core\Src\usart.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.o
+.\build\Bootloader\.obj\__\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.o
+.\build\Bootloader\.obj\__\FATFS\App\fatfs.o
+.\build\Bootloader\.obj\__\FATFS\Target\user_diskio.o
+.\build\Bootloader\.obj\__\Middlewares\Third_Party\FatFs\src\diskio.o
+.\build\Bootloader\.obj\__\Middlewares\Third_Party\FatFs\src\ff.o
+.\build\Bootloader\.obj\__\Middlewares\Third_Party\FatFs\src\ff_gen_drv.o
+.\build\Bootloader\.obj\__\Middlewares\Third_Party\FatFs\src\option\syscall.o
+.\build\Bootloader\.obj\startup_stm32f407xx.o -o .\build\Bootloader\Bootloader_F407.axf
