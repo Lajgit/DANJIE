@@ -9,6 +9,7 @@
 
 #define Mesg_Head 0xAA
 #define Mesg_Tail 0x55
+#define COIN_INPUT_DEBOUNCE_TIME 50U
 
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
@@ -20,6 +21,10 @@ extern uint8_t LightBelt_Lightness;
 extern uint8_t sm16306s_data[2];
 extern Rx_HandleTypeDef Rx1;
 extern Rx_HandleTypeDef Rx3;
+
+static uint32_t CoinInputLastTick = 0;
+static uint8_t CoinInputTriggered = 0;
+
 static void HoolleInput_IRQ(void)
 {
     EventGroupSetBits(&Mesg_event, MesgEvent_HoolleInput);
@@ -27,7 +32,15 @@ static void HoolleInput_IRQ(void)
 
 static void CoinInput_IRQ(void)
 {
-    EventGroupSetBits(&Mesg_event, MesgEvent_CoinInput);
+    uint32_t CurrentTick = HAL_GetTick();
+
+    // 投币器有效低电平脉冲约37.8ms，50ms内的重复上升沿视为抖动
+    if (CoinInputTriggered == 0 || CurrentTick - CoinInputLastTick >= COIN_INPUT_DEBOUNCE_TIME)
+    {
+        CoinInputLastTick = CurrentTick;
+        CoinInputTriggered = 1;
+        EventGroupSetBits(&Mesg_event, MesgEvent_CoinInput);
+    }
 }
 
 static void Hoolle_1_Output_IRQ(void)
