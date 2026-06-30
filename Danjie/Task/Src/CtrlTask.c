@@ -9,10 +9,15 @@
 #include "port_event.h"
 #include "string.h"
 
+#define DoorServoTimeout_time 1000
+
 Motor_Hoolle Motor_Hoolle1, Motor_Hoolle2;
 Motor_Card Card;
 servo_t Servo1, Servo2, Servo3;
 Switch_Valve Lock_Valve;
+
+static uint32_t DoorServoRuntick = 0;
+static uint8_t DoorServoRunning = 0;
 
 extern Tx_HandleTypeDef Tx1;
 extern Scene_t Scene;
@@ -23,6 +28,31 @@ static inline uint32_t Get_SysTime(void)
 {
     return HAL_GetTick();
 }
+
+static void DoorServo_SetAngle(void *servo, uint16_t angle)
+{
+    servo_t *Servo = (servo_t *)servo;
+
+    Servo->angle = angle;
+    Servo_SetAngle(Servo->htim, Servo->channel, Servo->angle);
+
+    HAL_TIM_PWM_Start(Servo2.htim, Servo2.channel);
+    HAL_TIM_PWM_Start(Servo3.htim, Servo3.channel);
+
+    DoorServoRuntick = Get_SysTime();
+    DoorServoRunning = 1;
+}
+
+static void Ctrl_DoorServo(void)
+{
+    if (DoorServoRunning != 0 && Get_SysTime() - DoorServoRuntick >= DoorServoTimeout_time)
+    {
+        HAL_TIM_PWM_Stop(Servo2.htim, Servo2.channel);
+        HAL_TIM_PWM_Stop(Servo3.htim, Servo3.channel);
+        DoorServoRunning = 0;
+    }
+}
+
 static void Ctrl_HoolleMotor(Motor_Hoolle *Motor, uint16_t speed, uint8_t dir, uint32_t timeout, uint32_t reverse_time, uint8_t retry_times, void (*Timeout_callbcak)(void))
 {
     // 开机吐珠电机
@@ -195,6 +225,8 @@ void Device_Init(void)
     Device_Servo_Init(&Servo1, &htim2, TIM_CHANNEL_3, 45, 135, 90);
     Device_Servo_Init(&Servo2, &htim2, TIM_CHANNEL_1, 0, 180, 5);
     Device_Servo_Init(&Servo3, &htim2, TIM_CHANNEL_2, 0, 180, 180);
+    Servo2.SetAngle = DoorServo_SetAngle;
+    Servo3.SetAngle = DoorServo_SetAngle;
     HAL_TIM_Base_Start(&htim7);
 
     Motor_Hoolle1.Hoolle_num = 0;
@@ -249,5 +281,6 @@ void CtrlTask(void)
     Ctrl_CardMotor(&Card, CardMotorTimeout_time, CardMotorTimeout_callback);
     /*==============电磁阀控制===============*/
     Ctrl_Valve(&Lock_Valve, ValveTimeout_time, NULL);
+    Ctrl_DoorServo();
     //Servo_AutoRun(&Servo1,2);
 }
