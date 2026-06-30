@@ -114,9 +114,15 @@ static void USART1_Deal(void *Rx_mesg)
                 /// 清珠
             case r_OutputAllHoolle:
                 if (mesg->ExpandCode == 0x00)
+                {
+                    Motor_Hoolle2.ClearMode = 1;
                     Hoolle_Output(&Motor_Hoolle2, 0xFFFF - Motor_Hoolle2.Hoolle_num);
+                }
                 else
+                {
+                    Motor_Hoolle1.ClearMode = 1;
                     Hoolle_Output(&Motor_Hoolle1, 0xFFFF - Motor_Hoolle1.Hoolle_num);
+                }
                 break;
                 /// 吐出剩余
             case r_OutputRemainingItem:

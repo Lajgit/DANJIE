@@ -38,6 +38,7 @@ static void Ctrl_HoolleMotor(Motor_Hoolle *Motor, uint16_t speed, uint8_t dir, u
         Motor->Motor.Stop(&Motor->Motor);
         Motor->Motor.state = DEVICE_STATE_IDLE;
         Motor->Hoolle_num = 0;
+        Motor->ClearMode = 0;
     }
     // 吐珠电机超时
     if (Motor->Motor.state == DEVICE_STATE_TIMEOUT)
@@ -55,6 +56,14 @@ static void Ctrl_HoolleMotor(Motor_Hoolle *Motor, uint16_t speed, uint8_t dir, u
             {
                 Motor->Motor.state = DEVICE_STATE_IDLE;
                 Motor->Motor.Stop(&Motor->Motor);
+
+                 /* 清珠空仓结束，清除0xFFFF剩余计数 */
+                if (Motor->ClearMode != 0)
+                {
+                    Motor->Hoolle_num = 0;
+                    Motor->ClearMode = 0;
+                }
+
                 // 超时停转后的反应
                 if (Timeout_callbcak != NULL)
                     Timeout_callbcak();
@@ -192,6 +201,8 @@ void Device_Init(void)
     Motor_Hoolle2.Hoolle_num = 0;
     Motor_Hoolle1.RetryCount = 0;
     Motor_Hoolle2.RetryCount = 0;
+    Motor_Hoolle1.ClearMode = 0;
+    Motor_Hoolle2.ClearMode = 0;
     Card.Card_num = 0;
     Servo2.SetAngle(&Servo2, 5);
     Servo3.SetAngle(&Servo3, 180);

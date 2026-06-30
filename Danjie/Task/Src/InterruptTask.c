@@ -10,6 +10,12 @@
 #define Mesg_Head 0xAA
 #define Mesg_Tail 0x55
 #define COIN_INPUT_DEBOUNCE_TIME 50U
+/*
+ * 实测钢珠光眼遮挡低电平约170～248ms。
+ * 低于50ms视为毛刺或抖动。
+ * 暂不设置最大值，避免因钢珠速度变化造成漏计。
+ */
+#define HOOLLE_OUTPUT_MIN_LOW_TIME 50U
 
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
@@ -45,69 +51,159 @@ static void CoinInput_IRQ(void)
 
 static void Hoolle_1_Output_IRQ(void)
 {
-    static uint16_t ShakeTime = 40000;
-    static uint16_t StarCount = 0;
-    uint16_t CurrCount = __HAL_TIM_GetCounter(&htim7);
-    if (HAL_GPIO_ReadPin(HoolleOutput_1_GPIO_Port, HoolleOutput_1_Pin) == GPIO_PIN_RESET)
+    static uint32_t LowStartTick = 0U;
+    static uint8_t LowStarted = 0U;
+
+    uint32_t CurrentTick;
+    uint32_t LowTime;
+
+    /*
+     * 空闲为高电平，钢珠遮挡为低电平。
+     *
+     * 下降沿进入这里时，GPIO已经是低电平：
+     * 记录钢珠开始遮挡的时间。
+     */
+    if (HAL_GPIO_ReadPin(
+            HoolleOutput_1_GPIO_Port,
+            HoolleOutput_1_Pin) == GPIO_PIN_RESET)
     {
-        Motor_Hoolle1.Motor.ResetRuntime(&Motor_Hoolle1.Motor);
-        StarCount = CurrCount;
-    }
-    else
-    {
-        uint16_t Delta = 0;
-        if (CurrCount < StarCount)
-            Delta = 0xFFFF - StarCount + CurrCount;
-        else
-            Delta = CurrCount - StarCount;
-        if (Delta > ShakeTime / 8)
+        /*
+         * 只记录正常正转过程中的下降沿。
+         * 反转或停止期间产生的光眼变化不参与计数。
+         */
+        if (Motor_Hoolle1.Motor.state == DEVICE_STATE_BUSY &&
+            Motor_Hoolle1.Hoolle_num > 0U)
         {
-            ShakeTime = Delta;
-            if (Motor_Hoolle1.Hoolle_num > 0)
-            {
-                Motor_Hoolle1.Hoolle_num--;
-                Motor_Hoolle1.RetryCount = 0;
-                EventGroupSetBits(&Mesg_event, MesgEvent_RemainingHoolle);
-                if (Motor_Hoolle1.Hoolle_num <= 0 && Motor_Hoolle1.Motor.state != DEVICE_STATE_IDLE)
-                {
-                    Motor_Hoolle1.Motor.state = DEVICE_STATE_STOP;
-                }
-            }
+            LowStartTick = HAL_GetTick();
+            LowStarted = 1U;
         }
+        else
+        {
+            LowStarted = 0U;
+        }
+
+        return;
+    }
+
+    /*
+     * 当前为高电平，表示钢珠离开光眼。
+     * 必须先检测到有效下降沿，才能组成完整遮挡脉冲。
+     */
+    if (LowStarted == 0U)
+    {
+        return;
+    }
+
+    CurrentTick = HAL_GetTick();
+    LowTime = CurrentTick - LowStartTick;
+    LowStarted = 0U;
+
+    /*
+     * 上升沿到来时仍必须处于正常正转状态。
+     * 防止下降沿发生在正转、上升沿发生在反转时误计。
+     */
+    if (Motor_Hoolle1.Motor.state != DEVICE_STATE_BUSY ||
+        Motor_Hoolle1.Hoolle_num == 0U)
+    {
+        return;
+    }
+
+    /*
+     * 实测正常低电平约170～248ms。
+     * 小于50ms的脉冲按毛刺或抖动处理。
+     */
+    if (LowTime < HOOLLE_OUTPUT_MIN_LOW_TIME)
+    {
+        return;
+    }
+
+    /*
+     * 只有完整有效的钢珠脉冲才刷新吐珠超时时间。
+     * 无效下降沿不再延长3秒超时。
+     */
+    Motor_Hoolle1.Motor.ResetRuntime(
+        &Motor_Hoolle1.Motor);
+
+    Motor_Hoolle1.Hoolle_num--;
+    Motor_Hoolle1.RetryCount = 0;
+
+    EventGroupSetBits(
+        &Mesg_event,
+        MesgEvent_RemainingHoolle);
+
+    if (Motor_Hoolle1.Hoolle_num == 0U)
+    {
+        Motor_Hoolle1.Motor.state =
+            DEVICE_STATE_STOP;
     }
 }
 
 static void Hoolle_2_Output_IRQ(void)
 {
-    static uint16_t ShakeTime = 40000;
-    static uint16_t StarCount = 0;
-    uint16_t CurrCount = __HAL_TIM_GetCounter(&htim7);
-    if (HAL_GPIO_ReadPin(HoolleOutput_2_GPIO_Port, HoolleOutput_2_Pin) == GPIO_PIN_RESET)
+    static uint32_t LowStartTick = 0U;
+    static uint8_t LowStarted = 0U;
+
+    uint32_t CurrentTick;
+    uint32_t LowTime;
+
+    /*
+     * 空闲高电平，珠子遮挡低电平。
+     */
+    if (HAL_GPIO_ReadPin(
+            HoolleOutput_2_GPIO_Port,
+            HoolleOutput_2_Pin) == GPIO_PIN_RESET)
     {
-        Motor_Hoolle2.Motor.ResetRuntime(&Motor_Hoolle2.Motor);
-        StarCount = CurrCount;
-    }
-    else
-    {
-        uint16_t Delta = 0;
-        if (CurrCount < StarCount)
-            Delta = 0xFFFF - StarCount + CurrCount;
-        else
-            Delta = CurrCount - StarCount;
-        if (Delta > ShakeTime / 8)
+        if (Motor_Hoolle2.Motor.state == DEVICE_STATE_BUSY &&
+            Motor_Hoolle2.Hoolle_num > 0U)
         {
-            ShakeTime = Delta;
-            if (Motor_Hoolle2.Hoolle_num > 0)
-            {
-                Motor_Hoolle2.Hoolle_num--;
-                Motor_Hoolle2.RetryCount = 0;
-                //EventGroupSetBits(&Mesg_event, MesgEvent_RemainingHoolle);
-                if (Motor_Hoolle2.Hoolle_num <= 0 && Motor_Hoolle2.Motor.state != DEVICE_STATE_IDLE)
-                {
-                    Motor_Hoolle2.Motor.state = DEVICE_STATE_STOP;
-                }
-            }
+            LowStartTick = HAL_GetTick();
+            LowStarted = 1U;
         }
+        else
+        {
+            LowStarted = 0U;
+        }
+
+        return;
+    }
+
+    if (LowStarted == 0U)
+    {
+        return;
+    }
+
+    CurrentTick = HAL_GetTick();
+    LowTime = CurrentTick - LowStartTick;
+    LowStarted = 0U;
+
+    if (Motor_Hoolle2.Motor.state != DEVICE_STATE_BUSY ||
+        Motor_Hoolle2.Hoolle_num == 0U)
+    {
+        return;
+    }
+
+    if (LowTime < HOOLLE_OUTPUT_MIN_LOW_TIME)
+    {
+        return;
+    }
+
+    Motor_Hoolle2.Motor.ResetRuntime(
+        &Motor_Hoolle2.Motor);
+
+    Motor_Hoolle2.Hoolle_num--;
+    Motor_Hoolle2.RetryCount = 0;
+
+    /*
+     * 保持原工程行为，不恢复瓷珠剩余数量上报。
+     */
+    // EventGroupSetBits(
+    //     &Mesg_event,
+    //     MesgEvent_RemainingHoolle);
+
+    if (Motor_Hoolle2.Hoolle_num == 0U)
+    {
+        Motor_Hoolle2.Motor.state =
+            DEVICE_STATE_STOP;
     }
 }
 
