@@ -157,8 +157,8 @@ static void USART1_Deal(void *Rx_mesg)
                 if (mesg->ExpandCode == 0x01)
                 {
                     // 开门
-                    Servo2.SetAngle(&Servo2, 90);
-                    Servo3.SetAngle(&Servo3, 90);
+                    Servo2.SetAngle(&Servo2, 80);
+                    Servo3.SetAngle(&Servo3, 80);
                     EventGroupSetBits(&Mesg_event, Event_DoorOpen);
                     Light1.Init = true;
                 }

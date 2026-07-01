@@ -6,6 +6,11 @@
 #include "port_key.h"
 #include "port_event.h"
 
+#define BUTTON_SHORT_GUARD_TIME 250U
+
+static uint32_t ButtonShortLastTick[2] = {0U, 0U};
+static uint8_t ButtonShortTriggered[2] = {0U, 0U};
+
 static GPIO_TypeDef *Button_GPIO[2] = {Button1_GPIO_Port, Encoder_K_GPIO_Port};
 static uint16_t Button_Pin[2] = {Button1_Pin, Encoder_K_Pin};
 
@@ -24,9 +29,42 @@ extern Event_Handle_t Event;
 extern Tx_HandleTypeDef Tx;
 
 /// ----------按键初始化----------
+// static void Button_ShortCallback(uint16_t id)
+// {
+//     Comm_SendMesg_FillData(&Tx, Ctrl_to_Board, 0x01, id + 1, 0x01);
+// }
+
 static void Button_ShortCallback(uint16_t id)
 {
-    Comm_SendMesg_FillData(&Tx, Ctrl_to_Board, 0x01, id + 1, 0x01);
+    uint32_t CurrentTick;
+
+    if (id >= 2U)
+    {
+        return;
+    }
+
+    CurrentTick = HAL_GetTick();
+
+    /*
+     * 防止同一次物理按键因释放抖动，
+     * 在短时间内重复产生短按消息。
+     */
+    if (ButtonShortTriggered[id] != 0U &&
+        (uint32_t)(CurrentTick - ButtonShortLastTick[id]) <
+            BUTTON_SHORT_GUARD_TIME)
+    {
+        return;
+    }
+
+    ButtonShortTriggered[id] = 1U;
+    ButtonShortLastTick[id] = CurrentTick;
+
+    Comm_SendMesg_FillData(
+        &Tx,
+        Ctrl_to_Board,
+        0x01,
+        id + 1,
+        0x01);
 }
 
 static void Button_LongCallback(uint16_t id)
