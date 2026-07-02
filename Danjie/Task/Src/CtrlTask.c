@@ -9,7 +9,7 @@
 #include "port_event.h"
 #include "string.h"
 
-#define DoorServoTimeout_time 500
+#define DoorServoTimeout_time 200
 
 Motor_Hoolle Motor_Hoolle1, Motor_Hoolle2;
 Motor_Card Card;
