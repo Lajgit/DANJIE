@@ -87,16 +87,35 @@ static bool RingBuffer_WriteByte(void *RB, uint8_t data)
 static bool RingBuffer_ReadByte(void *RB, uint8_t *data)
 {
     RingBuffer_t *rb = (RingBuffer_t *)RB;
+    uint32_t primask;
+
     if (rb == NULL || data == NULL)
         return false;
-    if (RingBuffer_IsEmpty(rb))
+
+    /*
+     * RingBuffer_WriteByte() 会在 UART 接收中断中修改
+     * Write_index 和 Count。
+     *
+     * 读取端必须保证“判空、读取、更新 Read_index、Count--”
+     * 是一个不可被 UART 中断打断的完整操作。
+     */
+    primask = __get_PRIMASK();
+    __disable_irq();
+
+    if (rb->Count == 0)
+    {
+        __set_PRIMASK(primask);
         return false;
+    }
+
     *data = rb->Buffer[rb->Read_index];
-    rb->Read_index = (rb->Read_index + 1) % rb->Size;
+    rb->Read_index = (rb->Read_index + 1U) % rb->Size;
     rb->Count--;
+
+    __set_PRIMASK(primask);
+
     return true;
 }
-
 /*
  * @brief 向环形缓冲区写入多个字节
  * @param RB 环形缓冲区句柄指针
