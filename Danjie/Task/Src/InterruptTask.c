@@ -11,6 +11,12 @@
 #define Mesg_Tail 0x55
 #define COIN_INPUT_DEBOUNCE_TIME 50U
 
+/*
+ * TIM7每个计数为0.1ms。
+ * 200个计数对应20ms。
+ */
+#define HOOLLE_LOW_MIN_COUNT 200U
+
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
 extern Motor_Hoolle Motor_Hoolle1, Motor_Hoolle2;
@@ -54,7 +60,7 @@ static void Hoolle_1_Output_IRQ(void)
     }
     else
     {
-        if (__HAL_TIM_GetCounter(&htim7) > 100)
+        if (__HAL_TIM_GetCounter(&htim7) > HOOLLE_LOW_MIN_COUNT)
         {
             /* 有效脉冲：更新剩余数量并通知任务 */
             EventGroupSetBits(&Mesg_event, MesgEvent_RemainingHoolle);
@@ -82,7 +88,7 @@ static void Hoolle_2_Output_IRQ(void)
     }
     else
     {
-        if (__HAL_TIM_GetCounter(&htim7) > 100)
+        if (__HAL_TIM_GetCounter(&htim7) > 1)
         {
             if (Motor_Hoolle2.Hoolle_num > 0)
             {
