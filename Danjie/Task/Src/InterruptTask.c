@@ -15,7 +15,7 @@
  * TIM7每个计数为0.1ms。
  * 200个计数对应20ms。
  */
-#define HOOLLE_LOW_MIN_COUNT 200U
+#define HOOLLE_LOW_MIN_COUNT 20U
 
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
@@ -51,30 +51,99 @@ static void CoinInput_IRQ(void)
 
 static void Hoolle_1_Output_IRQ(void)
 {
-    if (HAL_GPIO_ReadPin(HoolleOutput_1_GPIO_Port, HoolleOutput_1_Pin) == GPIO_PIN_RESET)
+    /*
+     * 最后一颗珠子下降沿到来时已经提前停止电机。
+     * 等上升沿确认脉宽有效后，再正式扣除数量。
+     */
+    static uint8_t LastBallStopped = 0U;
+
+    uint32_t LowCount;
+
+    if (HAL_GPIO_ReadPin(
+            HoolleOutput_1_GPIO_Port,
+            HoolleOutput_1_Pin) == GPIO_PIN_RESET)
     {
-        /* 脉冲开始：重置计时器并重置运行时 */
+        /*
+         * 下降沿：钢珠开始遮挡光眼。
+         */
         __HAL_TIM_SetCounter(&htim7, 0);
-        Motor_Hoolle1.Motor.ResetRuntime(&Motor_Hoolle1.Motor);
+        Motor_Hoolle1.Motor.ResetRuntime(
+            &Motor_Hoolle1.Motor);
+
+        /*
+         * 当前只剩最后一颗，并且电机正在正常吐珠：
+         * 在最后一颗进入光眼时立即停止电机。
+         *
+         * 此处只停止硬件输出，逻辑状态暂时保持BUSY，
+         * 避免CtrlTask提前把Hoolle_num清零。
+         */
+        if (Motor_Hoolle1.Hoolle_num == 1U &&
+            Motor_Hoolle1.Motor.state == DEVICE_STATE_BUSY)
+        {
+            Motor_Hoolle1.Motor.Stop(
+                &Motor_Hoolle1.Motor);
+
+            LastBallStopped = 1U;
+        }
+        else
+        {
+            LastBallStopped = 0U;
+        }
+
         return;
     }
-    else
+
+    /*
+     * 上升沿：钢珠离开光眼。
+     */
+    LowCount = __HAL_TIM_GetCounter(&htim7);
+
+    if (LowCount > HOOLLE_LOW_MIN_COUNT)
     {
-        if (__HAL_TIM_GetCounter(&htim7) > HOOLLE_LOW_MIN_COUNT)
+        /*
+         * 低电平超过20ms，确认是一颗有效钢珠。
+         */
+        EventGroupSetBits(
+            &Mesg_event,
+            MesgEvent_RemainingHoolle);
+
+        if (Motor_Hoolle1.Hoolle_num > 0U)
         {
-            /* 有效脉冲：更新剩余数量并通知任务 */
-            EventGroupSetBits(&Mesg_event, MesgEvent_RemainingHoolle);
-            if (Motor_Hoolle1.Hoolle_num > 0)
+            Motor_Hoolle1.Hoolle_num--;
+            Motor_Hoolle1.RetryCount = 0;
+
+            /*
+             * 最后一颗已经在下降沿停止过硬件输出。
+             * 此处设置STOP，让CtrlTask完成IDLE、
+             * Hoolle_num和ClearMode的状态收尾。
+             */
+            if (Motor_Hoolle1.Hoolle_num == 0U &&
+                Motor_Hoolle1.Motor.state != DEVICE_STATE_IDLE)
             {
-                Motor_Hoolle1.Hoolle_num--;
-                Motor_Hoolle1.RetryCount = 0;
-                if (Motor_Hoolle1.Hoolle_num == 0 && Motor_Hoolle1.Motor.state != DEVICE_STATE_IDLE)
-                {
-                    Motor_Hoolle1.Motor.state = DEVICE_STATE_STOP;
-                }
+                Motor_Hoolle1.Motor.state =
+                    DEVICE_STATE_STOP;
             }
         }
+
+        LastBallStopped = 0U;
+        return;
     }
+
+    /*
+     * 低电平不足20ms，视为毛刺。
+     *
+     * 如果刚才因为“最后一颗下降沿”提前停止过电机，
+     * 则重新进入START状态，让CtrlTask恢复吐珠。
+     */
+    if (LastBallStopped != 0U &&
+        Motor_Hoolle1.Hoolle_num == 1U &&
+        Motor_Hoolle1.Motor.state == DEVICE_STATE_BUSY)
+    {
+        Motor_Hoolle1.Motor.state =
+            DEVICE_STATE_START;
+    }
+
+    LastBallStopped = 0U;
 }
 
 static void Hoolle_2_Output_IRQ(void)
