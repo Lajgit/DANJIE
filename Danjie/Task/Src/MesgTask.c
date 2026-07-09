@@ -20,8 +20,12 @@ Event_Handle_t Mesg_event;
 // 发送给NFC开锁消息
 static uint8_t NFCUnlock_mesg[11] = {0xaa, 0x0f, 0x01, 0x01, 0x01, 0x01, 0x5c, 0x77, 0x08, 0x7f, 0x55};
 
+extern volatile uint16_t HoolleInputPendingCount;
 void Mesg_Task(void)
 {
+
+    uint8_t HoolleInputPending = 0U;
+    uint32_t Primask;
     // 按键进入设置
     if (EventGroupCheckBits(&Mesg_event, MesgEvent_ButtonEnterSetting))
     {
@@ -35,10 +39,30 @@ void Mesg_Task(void)
         EventGroupClearBits(&Mesg_event, MesgEvent_Unlock);
     }
     // 投珠
-    if (EventGroupCheckBits(&Mesg_event, MesgEvent_HoolleInput) == true)
+    /*
+    * 从中断累计值中原子取出一个进珠事件。
+    * 临界区只包含计数操作，不包含串口发送。
+    */
+    Primask = __get_PRIMASK();
+    __disable_irq();
+
+    if (HoolleInputPendingCount > 0U)
     {
-        Comm_SendMesg_FillData_withResend(&Tx1, Board_to_Android, t_HoolleInput, 0x00, 0x00, &ResendList);
-        EventGroupClearBits(&Mesg_event, MesgEvent_HoolleInput);
+        HoolleInputPendingCount--;
+        HoolleInputPending = 1U;
+    }
+
+    __set_PRIMASK(Primask);
+
+    if (HoolleInputPending != 0U)
+    {
+        Comm_SendMesg_FillData_withResend(
+            &Tx1,
+            Board_to_Android,
+            t_HoolleInput,
+            0x00,
+            0x00,
+            &ResendList);
     }
     // 投币
     if (EventGroupCheckBits(&Mesg_event, MesgEvent_CoinInput) == true)

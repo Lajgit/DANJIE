@@ -16,6 +16,7 @@
  * 20个计数对应2ms。
  */
 #define HOOLLE_LOW_MIN_COUNT 20U
+volatile uint16_t HoolleInputPendingCount = 0U;
 
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
@@ -33,7 +34,14 @@ static uint8_t CoinInputTriggered = 0;
 
 static void HoolleInput_IRQ(void)
 {
-    EventGroupSetBits(&Mesg_event, MesgEvent_HoolleInput);
+    /*
+     * 中断中只累计次数，不执行串口发送。
+     * 饱和保护避免计数溢出。
+     */
+    if (HoolleInputPendingCount < 0xFFFFU)
+    {
+        HoolleInputPendingCount++;
+    }
 }
 
 static void CoinInput_IRQ(void)

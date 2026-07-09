@@ -12,7 +12,7 @@
 #define Valve_TriggerCount 1
 
 #define HoolleMotor_Speed 85 // 吐珠电机速度100%
-#define HoolleMotor2_Speed 65 // 吐珠电机速度40%
+#define HoolleMotor2_Speed 80 // 吐珠电机速度40%
 #define HoolleMotor_Dir 0     // 吐珠电机方向
 
 typedef struct

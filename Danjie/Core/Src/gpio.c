@@ -66,7 +66,17 @@ void MX_GPIO_Init(void)
                           |Q11_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : HoolleInput_Pin CardFeedback_Pin CoinInput_Pin */
-  GPIO_InitStruct.Pin = HoolleInput_Pin|CardFeedback_Pin|CoinInput_Pin;
+  /* 进珠光眼：珠子开始遮挡时计数 */
+  GPIO_InitStruct.Pin = HoolleInput_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /* 出卡反馈和投币保持原上升沿 */
+  GPIO_InitStruct.Pin =
+      CardFeedback_Pin |
+      CoinInput_Pin;
+
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);

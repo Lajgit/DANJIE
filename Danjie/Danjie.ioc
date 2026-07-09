@@ -361,6 +361,13 @@ PE2.GPIOParameters=GPIO_Label
 PE2.GPIO_Label=HoolleInput
 PE2.Locked=true
 PE2.Signal=GPXTI2
+
+PE2.GPIOParameters=GPIO_Label,GPIO_ModeDefaultEXTI
+PE2.GPIO_Label=HoolleInput
+PE2.GPIO_ModeDefaultEXTI=GPIO_MODE_IT_FALLING
+PE2.Locked=true
+PE2.Signal=GPXTI2
+
 PE3.GPIOParameters=GPIO_Label,GPIO_ModeDefaultEXTI
 PE3.GPIO_Label=HoolleOutput_1
 PE3.GPIO_ModeDefaultEXTI=GPIO_MODE_IT_RISING_FALLING
