@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LightTask.h"
+#include "InterruptTask.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -190,6 +191,8 @@ void SysTick_Handler(void)
 
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
+
+  HoolleInput_Scan1ms();
   /* USER CODE BEGIN SysTick_IRQn 1 */
   LightEffectTimer_ISR();
   /* USER CODE END SysTick_IRQn 1 */

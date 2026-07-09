@@ -37,6 +37,7 @@ void Main_Init(void)
     FlashTask_Init();
     CommInit();
     Device_Init();
+    HoolleInput_FilterInit();
     KeyAll_Init();
     LightTask_Init();
     Comm_SendMesg_FillData(&Tx3, Board_to_Ctrl, 0x04, Setting.Ctrl_Lightness, 0x00); // 控台亮度

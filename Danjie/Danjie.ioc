@@ -357,14 +357,9 @@ PD9.Signal=GPIO_Input
 PE11.Signal=S_TIM1_CH2
 PE13.Signal=S_TIM1_CH3
 PE14.Signal=S_TIM1_CH4
-PE2.GPIOParameters=GPIO_Label
-PE2.GPIO_Label=HoolleInput
-PE2.Locked=true
-PE2.Signal=GPXTI2
-
 PE2.GPIOParameters=GPIO_Label,GPIO_ModeDefaultEXTI
 PE2.GPIO_Label=HoolleInput
-PE2.GPIO_ModeDefaultEXTI=GPIO_MODE_IT_FALLING
+PE2.GPIO_ModeDefaultEXTI=GPIO_MODE_IT_RISING_FALLING
 PE2.Locked=true
 PE2.Signal=GPXTI2
 

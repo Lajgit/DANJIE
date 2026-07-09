@@ -17,6 +17,24 @@
  */
 #define HOOLLE_LOW_MIN_COUNT 20U
 volatile uint16_t HoolleInputPendingCount = 0U;
+/*
+ * 进珠光眼初始滤波参数。
+ *
+ * LOW_MIN：
+ *   低电平不足2ms视为毛刺。
+ *
+ * LOW_MAX：
+ *   遮挡超过1000ms视为卡珠或异常，不计数。
+ *
+ * HIGH_MIN：
+ *   前一次上升沿后，高电平至少稳定5ms，
+ *   才允许识别下一次下降沿。
+ *
+ * 这些值尚未通过示波器实测，属于初始测试值。
+ */
+#define HOOLLE_INPUT_LOW_MIN_MS   1U
+#define HOOLLE_INPUT_LOW_MAX_MS   1000U
+#define HOOLLE_INPUT_HIGH_MIN_MS  3U
 
 extern Event_Handle_t Mesg_event;
 extern Event_Handle_t Event;
@@ -32,16 +50,195 @@ extern Rx_HandleTypeDef Rx3;
 static uint32_t CoinInputLastTick = 0;
 static uint8_t CoinInputTriggered = 0;
 
+#define HOOLLE_INPUT_FILTER_MS  3U
+
+// volatile uint16_t HoolleInputPendingCount = 0U;
+
+static uint8_t HoolleInputRawState = 1U;
+static uint8_t HoolleInputStableState = 1U;
+static uint8_t HoolleInputSameCount = 0U;
+
+void HoolleInput_FilterInit(void)
+{
+    uint8_t CurrentState;
+
+    CurrentState =
+        HAL_GPIO_ReadPin(
+            HoolleInput_GPIO_Port,
+            HoolleInput_Pin) == GPIO_PIN_SET
+            ? 1U
+            : 0U;
+
+    HoolleInputRawState = CurrentState;
+    HoolleInputStableState = CurrentState;
+    HoolleInputSameCount = 0U;
+}
+
+void HoolleInput_Scan1ms(void)
+{
+    uint8_t CurrentState;
+
+    CurrentState =
+        HAL_GPIO_ReadPin(
+            HoolleInput_GPIO_Port,
+            HoolleInput_Pin) == GPIO_PIN_SET
+            ? 1U
+            : 0U;
+
+    /*
+     * 检查当前采样值是否连续保持不变。
+     */
+    if (CurrentState == HoolleInputRawState)
+    {
+        if (HoolleInputSameCount < HOOLLE_INPUT_FILTER_MS)
+        {
+            HoolleInputSameCount++;
+        }
+    }
+    else
+    {
+        HoolleInputRawState = CurrentState;
+        HoolleInputSameCount = 1U;
+    }
+
+    /*
+     * 电平连续稳定达到设定时间后，
+     * 才更新稳定状态。
+     */
+    if (HoolleInputSameCount >= HOOLLE_INPUT_FILTER_MS &&
+        HoolleInputStableState != HoolleInputRawState)
+    {
+        HoolleInputStableState = HoolleInputRawState;
+
+        /*
+         * 光眼低电平表示珠子进入。
+         * 只有稳定状态从高变低时才计一颗。
+         *
+         * 稳定状态必须重新恢复为高电平后，
+         * 才能识别下一颗，因此同一颗抖动不会连续计数。
+         */
+        if (HoolleInputStableState == 0U)
+        {
+            if (HoolleInputPendingCount < 0xFFFFU)
+            {
+                HoolleInputPendingCount++;
+            }
+        }
+    }
+}
+
 static void HoolleInput_IRQ(void)
 {
-    /*
-     * 中断中只累计次数，不执行串口发送。
-     * 饱和保护避免计数溢出。
-     */
-    if (HoolleInputPendingCount < 0xFFFFU)
-    {
-        HoolleInputPendingCount++;
-    }
+    // /*
+    //  * WaitingRise：
+    //  * 0：等待珠子进入，即等待下降沿。
+    //  * 1：已经检测到下降沿，等待对应上升沿。
+    //  */
+    // static uint8_t WaitingRise = 0U;
+
+    // /*
+    //  * HasRise：
+    //  * 是否已经记录过上升沿。
+    //  * 第一次上电时没有上升沿记录，不检查高电平间隔。
+    //  */
+    // static uint8_t HasRise = 0U;
+
+    // /*
+    //  * LowStartTick：
+    //  * 当前低电平开始时间。
+    //  *
+    //  * LastRiseTick：
+    //  * 最近一次上升沿时间，用于检查高电平稳定时间。
+    //  */
+    // static uint32_t LowStartTick = 0U;
+    // static uint32_t LastRiseTick = 0U;
+
+    // uint32_t CurrentTick;
+    // uint32_t LowTime;
+    // uint32_t HighTime;
+    // GPIO_PinState PinState;
+
+    // CurrentTick = HAL_GetTick();
+
+    // PinState = HAL_GPIO_ReadPin(
+    //     HoolleInput_GPIO_Port,
+    //     HoolleInput_Pin);
+
+    // /*
+    //  * 当前是低电平：
+    //  * 说明发生下降沿，珠子开始遮挡光眼。
+    //  */
+    // if (PinState == GPIO_PIN_RESET)
+    // {
+    //     /*
+    //      * 已经记录过下降沿，正在等待上升沿。
+    //      * 不重复记录同一次遮挡。
+    //      */
+    //     if (WaitingRise != 0U)
+    //     {
+    //         return;
+    //     }
+
+    //     /*
+    //      * 前一次上升沿后，高电平时间必须足够长。
+    //      * 高电平太短说明很可能是同一颗珠抖动。
+    //      */
+    //     if (HasRise != 0U)
+    //     {
+    //         HighTime = CurrentTick - LastRiseTick;
+
+    //         if (HighTime < HOOLLE_INPUT_HIGH_MIN_MS)
+    //         {
+    //             return;
+    //         }
+    //     }
+
+    //     LowStartTick = CurrentTick;
+    //     WaitingRise = 1U;
+    //     return;
+    // }
+
+    // /*
+    //  * 当前是高电平：
+    //  * 说明发生上升沿，珠子离开光眼。
+    //  *
+    //  * 无论这次脉冲是否有效，都记录上升沿时间，
+    //  * 防止毛刺结束后立即再次被当成新珠子。
+    //  */
+    // LastRiseTick = CurrentTick;
+    // HasRise = 1U;
+
+    // /*
+    //  * 没有对应的下降沿，忽略这个上升沿。
+    //  */
+    // if (WaitingRise == 0U)
+    // {
+    //     return;
+    // }
+
+    // LowTime = CurrentTick - LowStartTick;
+    // WaitingRise = 0U;
+
+    // /*
+    //  * 低电平时间太短：电气毛刺、反光或边缘抖动。
+    //  *
+    //  * 低电平时间太长：卡珠、持续遮挡或传感器异常。
+    //  */
+    // if (LowTime < HOOLLE_INPUT_LOW_MIN_MS ||
+    //     LowTime > HOOLLE_INPUT_LOW_MAX_MS)
+    // {
+    //     return;
+    // }
+
+    // /*
+    //  * 只有完成一次有效的：
+    //  * 下降沿 → 有效低电平 → 上升沿
+    //  * 才确认一颗珠。
+    //  */
+    // if (HoolleInputPendingCount < 0xFFFFU)
+    // {
+    //     HoolleInputPendingCount++;
+    // }
 }
 
 static void CoinInput_IRQ(void)
