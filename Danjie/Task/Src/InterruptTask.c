@@ -13,7 +13,7 @@
 
 /*
  * TIM7每个计数为0.1ms。
- * 200个计数对应20ms。
+ * 20个计数对应2ms。
  */
 #define HOOLLE_LOW_MIN_COUNT 20U
 
@@ -148,28 +148,79 @@ static void Hoolle_1_Output_IRQ(void)
 
 static void Hoolle_2_Output_IRQ(void)
 {
-    if (HAL_GPIO_ReadPin(HoolleOutput_2_GPIO_Port, HoolleOutput_2_Pin) == GPIO_PIN_RESET)
+    /*
+     * 最后一颗珠子下降沿到来时已经提前停止电机。
+     */
+    static uint8_t LastBallStopped = 0U;
+
+    uint32_t LowCount;
+
+    if (HAL_GPIO_ReadPin(
+            HoolleOutput_2_GPIO_Port,
+            HoolleOutput_2_Pin) == GPIO_PIN_RESET)
     {
-        /* 脉冲开始：重置计时器并重置运行时 */
+        /*
+         * 下降沿：钢珠开始遮挡光眼。
+         */
         __HAL_TIM_SetCounter(&htim7, 0);
-        Motor_Hoolle2.Motor.ResetRuntime(&Motor_Hoolle2.Motor);
+        Motor_Hoolle2.Motor.ResetRuntime(
+            &Motor_Hoolle2.Motor);
+
+        /*
+         * 只剩最后一颗时，在下降沿立即停止电机。
+         */
+        if (Motor_Hoolle2.Hoolle_num == 1U &&
+            Motor_Hoolle2.Motor.state == DEVICE_STATE_BUSY)
+        {
+            Motor_Hoolle2.Motor.Stop(
+                &Motor_Hoolle2.Motor);
+
+            LastBallStopped = 1U;
+        }
+        else
+        {
+            LastBallStopped = 0U;
+        }
+
         return;
     }
-    else
+
+    /*
+     * 上升沿：检查低电平持续时间。
+     */
+    LowCount = __HAL_TIM_GetCounter(&htim7);
+
+    if (LowCount > 1)
     {
-        if (__HAL_TIM_GetCounter(&htim7) > 1)
+        if (Motor_Hoolle2.Hoolle_num > 0U)
         {
-            if (Motor_Hoolle2.Hoolle_num > 0)
+            Motor_Hoolle2.Hoolle_num--;
+            Motor_Hoolle2.RetryCount = 0;
+
+            if (Motor_Hoolle2.Hoolle_num == 0U &&
+                Motor_Hoolle2.Motor.state != DEVICE_STATE_IDLE)
             {
-                Motor_Hoolle2.Hoolle_num--;
-                Motor_Hoolle2.RetryCount = 0;
-                if (Motor_Hoolle2.Hoolle_num == 0 && Motor_Hoolle2.Motor.state != DEVICE_STATE_IDLE)
-                {
-                    Motor_Hoolle2.Motor.state = DEVICE_STATE_STOP;
-                }
+                Motor_Hoolle2.Motor.state =
+                    DEVICE_STATE_STOP;
             }
         }
+
+        LastBallStopped = 0U;
+        return;
     }
+
+    /*
+     * 低电平不足20ms，恢复被提前停止的电机。
+     */
+    if (LastBallStopped != 0U &&
+        Motor_Hoolle2.Hoolle_num == 1U &&
+        Motor_Hoolle2.Motor.state == DEVICE_STATE_BUSY)
+    {
+        Motor_Hoolle2.Motor.state =
+            DEVICE_STATE_START;
+    }
+
+    LastBallStopped = 0U;
 }
 
 static void CardOutput_IRQ(void)
