@@ -222,9 +222,9 @@ void Device_Init(void)
     Device_Motor_Init(&Motor_Hoolle2.Motor, &htim1, TIM_CHANNEL_3, &htim1, TIM_CHANNEL_4);
     Device_Switch_Init(&Card.Switch, CardOutput_GPIO_Port, CardOutput_Pin, GPIO_PIN_SET);
     Device_Switch_Init(&Lock_Valve.Switch, GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
-    Device_Servo_Init(&Servo1, &htim2, TIM_CHANNEL_3, 45, 135, 90);
-    Device_Servo_Init(&Servo2, &htim2, TIM_CHANNEL_1, 0, 180, 5);
-    Device_Servo_Init(&Servo3, &htim2, TIM_CHANNEL_2, 0, 180, 180);
+    Device_Servo_Init(&Servo1, &htim2, TIM_CHANNEL_3, 50, 130, 90);
+    Device_Servo_Init(&Servo2, &htim2, TIM_CHANNEL_1, 5, 65, 5);
+    Device_Servo_Init(&Servo3, &htim2, TIM_CHANNEL_2, 115, 175, 115);
     Servo2.SetAngle = DoorServo_SetAngle;
     Servo3.SetAngle = DoorServo_SetAngle;
     HAL_TIM_Base_Start(&htim7);
@@ -237,7 +237,7 @@ void Device_Init(void)
     Motor_Hoolle2.ClearMode = 0;
     Card.Card_num = 0;
     Servo2.SetAngle(&Servo2, 5);
-    Servo3.SetAngle(&Servo3, 180);
+    Servo3.SetAngle(&Servo3, 115);
 }
 
 
@@ -245,31 +245,40 @@ void Servo_AutoRun(servo_t *Servo, uint32_t time)
 {
     static uint32_t Time = 0;
     static uint8_t dir = 0;
-    static uint32_t time_now;
-    time_now = HAL_GetTick();
-    if (time_now - Time > time)
+    uint32_t time_now = HAL_GetTick();
+
+    if (time_now - Time >= time)
     {
+        Time = time_now;
+
         if (dir == 0)
         {
-            if (Servo->angle < Servo->max_angle)
+            /* 向最大角度移动 */
+            if (Servo->angle + 2 >= Servo->max_angle)
             {
-                Servo->angle += 2;
-                Servo->SetAngle(Servo, Servo->angle);
+                Servo->angle = Servo->max_angle;
+                dir = 1;
             }
             else
-                dir = 1;
+            {
+                Servo->angle += 2;
+            }
         }
         else
         {
-            if (Servo->angle > Servo->min_angle)
+            /* 向最小角度移动 */
+            if (Servo->angle <= Servo->min_angle + 2)
             {
-                Servo->angle -= 2;
-                Servo->SetAngle(Servo, Servo->angle);
+                Servo->angle = Servo->min_angle;
+                dir = 0;
             }
             else
-                dir = 0;
+            {
+                Servo->angle -= 2;
+            }
         }
-        Time = time_now;
+
+        Servo->SetAngle(Servo, Servo->angle);
     }
 }
 void CtrlTask(void)
@@ -282,5 +291,5 @@ void CtrlTask(void)
     /*==============电磁阀控制===============*/
     Ctrl_Valve(&Lock_Valve, ValveTimeout_time, NULL);
     Ctrl_DoorServo();
-    //Servo_AutoRun(&Servo1,2);
+    //Servo_AutoRun(&Servo1, 75);//舵机1自动摆动
 }
