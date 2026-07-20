@@ -82,6 +82,18 @@ void Mesg_Task(void)
         Comm_SendMesg_FillData_withResend(&Tx1, Board_to_Android, t_CardOutputTimeOut, (uint32_t)Card.Card_num, 0x00, &ResendList);
         EventGroupClearBits(&Mesg_event, MesgEvent_CardOutputTimeout);
     }
+    // 每次吐卡后发送剩余卡片数：功能码0x05，补充位2为0x01
+    if (EventGroupCheckBits(&Mesg_event, MesgEvent_CardOutputOnce))
+    {
+        Comm_SendMesg_FillData(&Tx1, Board_to_Android, t_RemainingHoolle, (uint32_t)Card.Card_num, 0x01);
+        EventGroupClearBits(&Mesg_event, MesgEvent_CardOutputOnce);
+    }
+    // 剩余卡片数为0时通知Unity关闭无卡提示弹窗：功能码0x11
+    if (EventGroupCheckBits(&Mesg_event, MesgEvent_CardOutputFinish))
+    {
+        Comm_SendMesg_FillData(&Tx1, Board_to_Android, t_ClearRemainMesg, 0x00, 0x00);
+        EventGroupClearBits(&Mesg_event, MesgEvent_CardOutputFinish);
+    }
     // 剩余珠子数
     if (EventGroupCheckBits(&Mesg_event, MesgEvent_RemainingHoolle) == true)
     {

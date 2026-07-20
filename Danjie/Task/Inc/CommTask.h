@@ -22,7 +22,7 @@
 #define t_CoinInput 0x02           // 投入硬币
 #define t_Button 0x03              // 拍拍按键
 #define t_SettingButton 0x04       // 设置按键
-#define t_RemainingHoolle 0x05     // 剩余珠子数
+#define t_RemainingHoolle 0x05     // 剩余物品数
 #define t_WinOrLoss 0x06           // 游戏结果
 #define t_HoolleOutputTimeOut 0x07 // 珠子输出超时
 #define t_CardOutputTimeOut 0x08   // 卡片输出超时
@@ -34,7 +34,7 @@
 #define t_LightEye 0x0E            // 光眼
 #define t_Encoder 0x0F             // 编码器
 #define t_ChannelRequest 0x10      // 击中通道位置反馈
-#define t_ClearRemainMesg 0x11     // 清除剩余珠子消息
+#define t_ClearRemainMesg 0x11     // 关闭无卡提示弹窗
 #define t_IntoHigherStage 0x12     // 进入高级后台
 
 /// 球盘接收到安卓的消息功能码
