@@ -64,7 +64,7 @@
 #define r_LightControl 0x15           // 灯控制
 #define r_DigitalTubeData 0x16        // 数字数据
 #define r_CtrlLightness 0x18          // 控台亮度
-#define r_ServoReset 0x20             // 舵机归零
+#define r_ServoReset 0x20              // 舵机归零
 #define r_StopAllDevice 0xFF          // 停止所有输出
 #define r_SystemReset 0xF0            // 系统复位
 
