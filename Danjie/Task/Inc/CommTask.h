@@ -36,6 +36,8 @@
 #define t_ChannelRequest 0x10      // 击中通道位置反馈
 #define t_ClearRemainMesg 0x11     // 清除剩余珠子消息
 #define t_IntoHigherStage 0x12     // 进入高级后台
+#define t_RemainingCard 0x13       // 剩余卡片数
+#define t_CloseNoCardPopup 0x14    // 关闭无卡提示弹窗
 
 /// 球盘接收到安卓的消息功能码
 #define r_GetVersion 0x00             // 获取版本信息
@@ -62,7 +64,7 @@
 #define r_LightControl 0x15           // 灯控制
 #define r_DigitalTubeData 0x16        // 数字数据
 #define r_CtrlLightness 0x18          // 控台亮度
-#define r_ServoReset 0x20              // 舵机归零
+#define r_ServoReset 0x20             // 舵机归零
 #define r_StopAllDevice 0xFF          // 停止所有输出
 #define r_SystemReset 0xF0            // 系统复位
 
